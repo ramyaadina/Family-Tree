@@ -1,0 +1,15 @@
+extends base.pug
+block content
+    h1 Welcome To Home Page
+    form(action='/insert' method='POST')
+        label ID:
+        input(type="text" name="id" autocomplete='off')
+        label Child:
+        input(type="text" name='child' autocomplete='off')
+        label Parent:
+        input(type="text" name='parent' autocomplete='off')
+        input(type="submit" value='Save')
+    
+
+
+
