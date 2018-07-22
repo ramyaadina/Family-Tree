@@ -6,9 +6,9 @@ export default class ChildForm extends React.Component {
         return (
             <div>
                 {this.props.value}
-                Name : <input type="text" />
-                Gender : <input type="radio" name="gender" value="male" checked /> Male<br />
-                <input type="radio" name="gender" value="female" /> Female
+                Name : <input type="text" /><br />
+                Gender : <input type="radio" name={this.props.value+"gender"} value="male" checked /> Male
+                <input type="radio" name={this.props.value+"gender"} value="female" /> Female
             </div>
         )
     }

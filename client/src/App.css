@@ -5,3 +5,17 @@
 a {
   text-decoration: none;
 }
+
+.tree {
+  text-align: center;
+  width: 85%;
+}
+
+li {
+  list-style: none;
+}
+
+.content {
+  width: 20%;
+  float: right;
+}

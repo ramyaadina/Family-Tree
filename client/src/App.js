@@ -11,7 +11,6 @@ class App extends Component {
       <div>
         <div className="App">
           <Text />
-          <Tree />
         </div>
         <div className="nav">
           <Main />
