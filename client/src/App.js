@@ -3,6 +3,7 @@ import Text from './Components/Text.js'
 import './App.css';
 import Tree from './Components/Tree';
 import { Menu } from 'antd'
+import Main from './Components/Main.js';
 
 class App extends Component {
   render() {
@@ -13,10 +14,11 @@ class App extends Component {
           <Tree />
         </div>
         <div className="nav">
-          <Menu>
+          <Main />
+          {/* <Menu>
             <Menu.Item key='name'>Name</Menu.Item>
             <Menu.Item key='gender'>Gender</Menu.Item>
-          </Menu>
+          </Menu> */}
         </div>
       </div>
     );
