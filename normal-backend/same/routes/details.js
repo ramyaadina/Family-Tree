@@ -76,7 +76,29 @@ router.put('/addperson/:user',(req,res,next)=>{
 
             //Adding Spouse gender
             var spGender = (partner.Gender == "female") ? "male" : "female"
+            
+            console.log(partner.Children)
+            if(partner.Children !== null)
+            {
+            
+                // Detail.findOneAndUpdate({Name:partner.Children},req.body,{new:true},(err,spouc)=>{
+                //     if(err) return res.status(500).send(err)
+                //     console.log("to update father field")
+                //     console.log(spouc)
+                // })
+                Detail.findOne({Name:partner.Children},function(err,child){
+                  child.Parents.Father = req.body.Spouse;
+                  child.save(function(err){
+                      if(err){
+                          console.log(err)
+                      }
+                      else{
+                          console.log("saved!")
+                      }
+                  })
+                })
 
+            }
 
             //Adding partner as a new document
 
@@ -98,9 +120,22 @@ router.put('/addperson/:user',(req,res,next)=>{
         Detail.findOneAndUpdate(req.params.user,req.body,{new:true},(err,bacche)=>{
             if(err) return res.status(500).send(err)
             console.log(bacche)
+             
+            console.log(bacche.Spouse)
+            if(bacche.Spouse !== 'null')
+            {
+                //Detail.update( { "Name": { $ne: null } }, { $set: { Children: req.body.Children } } )
+
+                Detail.findOneAndUpdate({Name:bacche.Spouse},{ Children: req.body.Children },{new:true},(err,spouc)=>{
+                    if(err) return res.status(500).send(err)
+                    console.log("to update child field")
+                    console.log(spouc)
+                })
+            }
+
 
             //Adding chidren as a new document
-
+        
             var child = new Detail({
                 Name:req.body.Children,
                 Gender:req.body.gender,
