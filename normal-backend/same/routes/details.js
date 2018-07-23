@@ -36,7 +36,17 @@ router.put('/addperson/:id',(req,res,next)=>{
     {
       Detail.findByIdAndUpdate(req.params.id,req.body,{new:true},(err,parents)=>{
           if(err) return res.status(500).send(err)
-          return res.send(parents)
+          //return res.send(parents)
+        console.log(parents)
+          var newData = new Detail({
+              Name:req.body.Parents.Father,
+              Spouse:req.body.Parents.Mother
+          })
+          newData.save()
+          .then(details=>{res.send(details)})
+          .catch(err=>{console.log(err);
+            res.status(400).send("not saved!")
+          })
       })
     }
 })
@@ -57,38 +67,7 @@ router.put('/addperson/:id',(req,res,next)=>{
 //  console.log(name);
  
 //  res.send(name)
-// })
-
-
-router.post('/further/:user',(req,res,next)=>{
-
-    Detail.findOne({'Name':req.params.user},(err,others)=>{
-        if(err) throw err
-        else
-        {
-       console.log(others.Parents.Father)
-       //res.send(others.Parents.Father)
-        var userData = new Detail({
-            Name: others.Parents.Father,
-            Gender:req.body.Gender,
-            Parents:req.body.Parents,
-            Children:[req.params.user,others.Gender],
-            Spouse:others.Parents.Mother
-        })
-         userData.save()
-         .then(details=>{
-             res.send(details)
-         })
-         .catch(err=>{
-            console.log(err);
-            res.status(400).send("not saved!");
-         })
-        }
-    })
-    // var userData = new Detail({
-
-    // })
-})
+// })\
 
 module.exports = router
 
