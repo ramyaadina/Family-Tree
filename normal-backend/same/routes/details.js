@@ -35,9 +35,10 @@ router.post('/addperson',(req,res,next)=>{
 router.put('/addperson/:user',(req,res,next)=>{
      if(req.body.relationship == 'parents')
     {
-      Detail.findOneAndUpdate(req.params.user,req.body,{new:true},(err,parents)=>{
-          if(err) return res.status(500).send(err)
+      Detail.findOneAndUpdate({Name:req.params.user},req.body,{new:true},(err,parents)=>{
+          if(err) return res.status(500)//.send(err)
           //return res.send(parents)
+          console.log("for grandparents")
         console.log(parents)
 
         //Adding father in a new document
@@ -48,7 +49,8 @@ router.put('/addperson/:user',(req,res,next)=>{
               Gender:"male"
           })
           Papa.save()
-          .then(details=>{res.send(details)})
+          //.then(details=>{res.send(details)})
+          .then(details=>{console.log(details)})
           .catch(err=>{console.log(err);
             res.status(400)
           })
@@ -145,7 +147,7 @@ router.put('/addperson/:user',(req,res,next)=>{
                 //Detail.update( { "Name": { $ne: null } }, { $set: { Children: req.body.Children } } )
 
                 Detail.findOneAndUpdate({Name:bacche.Spouse},{ Children: req.body.Children },{new:true},(err,spouc)=>{
-                    if(err) return res.status(500).send(err)
+                    if(err) return res.status(500)//.send(err)
                     console.log("to update child field")
                     console.log(spouc)
                 })
@@ -190,6 +192,19 @@ router.put('/addperson/:user',(req,res,next)=>{
             res.status(400).send("not saved!")})
         })
     }
+
+
+    // else
+    // {
+    //     Detail.findOneAndUpdate(req.params.user,req.body,{new:true},(err,grand)=>{
+    //         if(err) return res.status(500).send(err)
+    //         console.log(grand)
+
+    //         //Adding grandparents as a new document
+
+
+    //     })
+    // }
 
 })
 
