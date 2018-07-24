@@ -3,17 +3,31 @@ var router = express.Router()
 
 var Detail = require('../models/userData')
 
-router.get('/data',(req,res,next)=>{
+// router.get('/data',(req,res,next)=>{
+//     res.send({type:'GET'})
+//     })
+    
+
+router.use ('/', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin)
+    res.header('Access-Control-Allow-Methods', '*')
+    // res.header('Access-Control-Allow-Methods', 'POST')
+    res.header('Access-Control-Allow-Headers', '*')
+    next()
+
+})
+
+router.get('/',(req,res,next)=>{
     res.send({type:'GET'})
     })
-    
+
 
 router.post('/addperson',(req,res,next)=>{
     // Detail.create(req.body).then(function(dat){
     //     console.log(dat)
     //     res.send(dat)
     // }).catch(next)
-    console.log(req.body.relationship)
+    console.log("body "+req.body.form)
     if(req.body.relationship == 'new')
     {
         var userData = new Detail({
@@ -23,7 +37,7 @@ router.post('/addperson',(req,res,next)=>{
         })
         userData.save()
         .then(details=>{
-            res.send(details) 
+            res.send("true") 
         })
         .catch(err=>{
            console.log(err);

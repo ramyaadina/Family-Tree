@@ -18,6 +18,7 @@
   "homepage": "https://github.com/ramyaadina/hello-world#readme",
   "dependencies": {
     "concurrently": "^3.6.0",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "styled-components": "^3.3.3"
   }
 }
