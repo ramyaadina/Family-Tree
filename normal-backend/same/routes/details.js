@@ -27,9 +27,10 @@ router.post('/addperson',(req,res,next)=>{
     //     console.log(dat)
     //     res.send(dat)
     // }).catch(next)
-    console.log("body "+req.body.form)
+    console.log("body ", req.body)
     if(req.body.relationship == 'new')
     {
+        console.log("in If")
         var userData = new Detail({
             Name:req.body.Name,
             Gender:req.body.Gender,
@@ -37,6 +38,7 @@ router.post('/addperson',(req,res,next)=>{
         })
         userData.save()
         .then(details=>{
+            console
             res.send("true") 
         })
         .catch(err=>{

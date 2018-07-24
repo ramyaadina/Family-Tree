@@ -7,8 +7,9 @@ export default class ChildForm extends React.Component {
         super(props);
         this.state = {
             name: '',
-            gender: 'm',
+            gender: ' ',
             response: '',
+            relationship:"new"
             //value: {},
         };
 
@@ -20,6 +21,12 @@ export default class ChildForm extends React.Component {
     // handleNameChange(event) {
     //     this.setState({ name: event.target.value });
     // }
+    nameChange=(e)=>{
+        console.log(e.target.value)
+        this.setState({
+            name:e.target.value
+        })
+    }
 
     handleGenderChange(event) {
         this.setState({ gender: event.target.value });
@@ -36,22 +43,25 @@ export default class ChildForm extends React.Component {
             header: {
                 'content-type': 'application/x-www-form-urlencoded',
                 'Origin': 'http://localhost:3000',
-                'Access-Control-Request-Method': '*',
+                'Access-Control-Request-Method': 'POST',
             },
-            form: {
-                Name : "Aish",
-                Gender: "male",
-                relationship: "new"
-            }
-          
+            body: {
+                
+                    Name : this.state.name,
+                    Gender: this.state.gender,
+                    relationship:this.state.relationship
+                
+            },
+          json:true
         }
-        var value
+        console.log(options.body)
+        var value;
         await request(options).then(data => {
                   value = data
-                  console.log(value)
+                  console.log(options)
                   //this.setState({isLoggedIn:value})
                 }).catch(e => console.error (e))
-                //return value
+                return value
 
         //var url = 'http://localhost:3001/details/addperson';
 
@@ -79,9 +89,9 @@ export default class ChildForm extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     {this.props.value}
-                    <input type="text"  name="name" onChange={this.props.nameChange} /><br />
-                    <input type="radio" name={this.props.value + "gender"} value="m" onChange={this.handleGenderChange} defaultChecked /> Male
-                    <input type="radio" name={this.props.value + "gender"} value="f" onChange={this.handleGenderChange} /> Female<br />
+                    <input type="text"  name="name" onChange={this.nameChange} /><br />
+                    <input type="radio" name={this.props.value + "gender"} value="male" onChange={this.handleGenderChange} defaultChecked /> Male
+                    <input type="radio" name={this.props.value + "gender"} value="female" onChange={this.handleGenderChange} /> Female<br />
                     <input type="submit" value="Submit" />
                 </form>
                 <p>
