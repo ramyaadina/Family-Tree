@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-color: rgb(176, 196, 155);
+}
+
+.Heading {
+  color: rgba(61, 51, 24, 0.973);
+  background-color: rgb(83, 121, 83);
 }
 
 a {

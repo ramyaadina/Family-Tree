@@ -5,19 +5,21 @@ export default class TreeNode extends React.Component {
     constructor() {
         super();
         this.state = {
-            name : "Me",
-            gender : "M"
+            name: "Me",
+            gender: "M"
         }
     }
+
+    handleClick = () => {
+        this.setState({ name: this.state.name });
+    }
+
     render() {
         return (
             <div>
-                <Button type="dashed"
-                    size="large"
-                    onClick={()=>{alert("Clicked")}}
-                    >
-                {this.state.name}</Button>
-                <Card title={this.state.name}>{this.state.gender}</Card>
+                <Button onClick={this.handleClick}>
+                    <input type="text" value={this.state.name}/>
+                </Button>
             </div>
         )
     }

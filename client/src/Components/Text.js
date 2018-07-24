@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class Text extends React.Component {
     state = {
-        response : ''
+        response: ''
     }
     componentDidMount() {
         var url = 'http://localhost:3001/api';
@@ -20,9 +20,11 @@ export default class Text extends React.Component {
     }
     render() {
         return (
-            <p>
-                Family Tree {this.state.response.message}
-            </p>
+            <div className="Heading">
+                <h1>
+                    Family Tree {this.state.response.message}
+                </h1>
+            </div>
         )
     }
 }
