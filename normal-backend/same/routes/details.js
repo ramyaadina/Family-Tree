@@ -78,7 +78,7 @@ router.put('/addperson/:user',(req,res,next)=>{
             var spGender = (partner.Gender == "female") ? "male" : "female"
             
             console.log(partner.Children)
-            if(partner.Children !== null)
+            if(partner.Children.length !== 0)
             {
             
                 // Detail.findOneAndUpdate({Name:partner.Children},req.body,{new:true},(err,spouc)=>{
@@ -97,9 +97,26 @@ router.put('/addperson/:user',(req,res,next)=>{
                       }
                   })
                 })
+                     
+
+                var partner = new Detail({
+                    Name:req.body.Spouse,
+                    Spouse:req.params.user,
+                    Gender:spGender,
+                    Children:partner.Children
+                })
+                partner.save()
+                .then(details=>{res.send(details)})
+                .catch(err=>{console.log(err);
+                  res.status(400).send("not saved!")
+                })
+                
+
 
             }
 
+            else
+            {
             //Adding partner as a new document
 
             var partner = new Detail({
@@ -113,6 +130,7 @@ router.put('/addperson/:user',(req,res,next)=>{
             .catch(err=>{console.log(err);
               res.status(400).send("not saved!")
             })
+        }
         })
     }
     else if(req.body.relationship == 'children')
