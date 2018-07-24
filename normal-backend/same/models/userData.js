@@ -17,7 +17,8 @@ var detailsSchema = mongoose.Schema({
         Mother:String
     },
     Children:[],
-    Spouse:String
+    Spouse:String,
+    Siblings:[]
 })
  
 
