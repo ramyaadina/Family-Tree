@@ -193,38 +193,25 @@ router.put('/addperson/:user',(req,res,next)=>{
         })
     }
 
+   }
+)
 
-    // else
-    // {
-    //     Detail.findOneAndUpdate(req.params.user,req.body,{new:true},(err,grand)=>{
-    //         if(err) return res.status(500).send(err)
-    //         console.log(grand)
+router.get('/showtree',(req,res,next)=>{
 
-    //         //Adding grandparents as a new document
+    // Detail.findOne({Name:req.params.user,function(err,allDetails){
+    //     if(err) throw err;
+    //     console.log(all)
+    //     res.send(allDetails)
+    //    }
+    //  })
+    console.log(req.params.user)
+    //res.send(req.params.user)
+    Detail.findOne({Name:"Kareena",function(err,allDetails){
+        if(err) throw err
+        console.log(allDetails)
+    }})
 
-
-    //     })
-    // }
-
-})
-
-
-// router.get('/further/:user',(req,res,next)=>{
-//     console.log(req.params.user)
-
-//  //var userData = new Detail({
-//     //Name = Detail.findParent(req.params.user)
-//  //})
-//  //var name = Detail.findParent()
-//  console.log('inside function');
- 
-//  //console.log(Detail.findParent(req.params.user))
-//  //res.send(Detail.findParent(req.params.user))
-//  var name = Detail.findParent(req.params.user)
-//  console.log(name);
- 
-//  res.send(name)
-// })\
-
+    }
+)
 module.exports = router
 
