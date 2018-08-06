@@ -7,10 +7,10 @@ export default class ChildForm extends React.Component {
         super(props);
         this.state = {
             name: '',
-            gender: ' ',
+            gender: '',
             response: '',
-            relationship:"new"
-            //value: {},
+            relationship:"new",
+            wrt:''
         };
 
         // this.handleNameChange = this.handleNameChange.bind(this);
@@ -29,6 +29,7 @@ export default class ChildForm extends React.Component {
     }
 
     handleGenderChange(event) {
+        console.log("childform");
         this.setState({ gender: event.target.value });
     }
 

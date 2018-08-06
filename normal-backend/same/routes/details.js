@@ -27,10 +27,10 @@ router.post('/addperson',(req,res,next)=>{
     //     console.log(dat)
     //     res.send(dat)
     // }).catch(next)
-    console.log("body ", req.body)
+    console.log("body from detais ", req.body)
     if(req.body.relationship == 'new')
     {
-        console.log("in If")
+       
         var userData = new Detail({
             Name:req.body.Name,
             Gender:req.body.Gender,
@@ -49,6 +49,8 @@ router.post('/addperson',(req,res,next)=>{
     
 })
 router.put('/addperson/:user',(req,res,next)=>{
+
+    console.log("INside Addperson/:user")
      if(req.body.relationship == 'parents')
     {
       Detail.findOneAndUpdate({Name:req.params.user},req.body,{new:true},(err,parents)=>{
@@ -188,6 +190,7 @@ router.put('/addperson/:user',(req,res,next)=>{
 
     else if(req.body.relationship == 'siblings')
     {
+        console.log("inside sibling body")
         Detail.findOneAndUpdate(req.params.user,req.body,{new:true},(err,baibehen)=>{
             if(err) return res.status(500).send(err)
             console.log(baibehen)

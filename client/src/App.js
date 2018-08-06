@@ -1,68 +1,314 @@
 import React, { Component } from 'react';
-import Text from './Components/Text.js'
 import './App.css';
-import Main from './Components/Main.js';
 import Node from './Components/Node.js';
 import Tree from 'react-d3-tree';
+import ChildForm from './Components/ChildForm';
+import Main from './Components/Main';
+import request from 'request-promise'
+import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
 
-const myTreeData = [
-  {
-    name: 'Parents',
-    attributes: {
-      Father: 'x',
-      Mother: 'y',
-    },
-    children: [
-      {
-        name: 'Children',
-        attributes: {
-          Husband: 'Dwayne',
-          Wife: 'Rina',
-        },
-        children: [
+const myTreeData =
+  [
+    {
+      name: 'Dewan Keshavmal',
+
+      children:
+        [
           {
-            name: 'Children',
-            attributes: {
-              Husband: <a href="//google.com">Dwayne</a>,
-              Wife: 'Rina',
+            name: 'Bashesharnath Kapoor',
+            attributes:
+            {
+
+              Wife: 'Ramsarni Mehra',
             },
+            children:
+              [
+                {
+                  name: 'Prithviraj Kapoor',
+                  attributes:
+                  {
+
+                    Wife: 'Ramsarni Mehra',
+                  },
+
+                  children:
+                    [
+                      {
+                        name: 'Ranbir Raj',
+                        attributes:
+                        {
+
+                          Wife: 'Krishna Malhothra',
+                        },
+                        children:
+                          [
+                            {
+                              name: "Randhir",
+                              attributes:
+                              {
+                                wife: "Babitha"
+                              },
+                              children: [
+                                {
+                                  name: "Karisma",
+                                  attributes: {
+                                    husband: "Sanjay Kapoor",
+                                  },
+                                  children: [
+                                    {
+                                      name: "Samaira",
+                                    }
+                                  ]
+                                },
+                                {
+                                  name: "Kareena",
+                                  attributes: {
+                                    husband: <a href="/saifali">Saif Ali Khan</a>
+                                  }
+
+                                }
+                              ]
+
+                            },
+                            {
+                              name: "Ritu",
+                              attributes:
+                              {
+                                husband: 'Rajan Nanda',
+                              },
+                              children: [
+                                {
+                                  name: "Nikhil",
+                                  attributes: {
+                                    wife: " Shwetha Bachchan",
+                                  },
+                                  children: [
+                                    {
+                                      name: " Navya Naveli",
+                                    },
+                                    {
+                                      name: "Agasthya"
+                                    },
+
+                                  ],
+
+
+                                },
+                                {
+                                  name: " Nitasha",
+                                }
+                              ]
+                            },
+                            {
+                              name: "Rishi",
+                              attributes: {
+                                wife: "Neethu Singh"
+                              },
+                              children: [
+                                {
+                                  name: "Ranbir Raj",
+                                },
+                                {
+                                  name: "Riddima"
+                                }
+                              ],
+
+                            },
+                            {
+                              name: "Rima",
+                              attributes: {
+                                husband: 'Manoj Jain'
+                              },
+                              children: [
+                                {
+                                  name: "Arman"
+
+                                },
+                                {
+                                  name: 'Aadar',
+                                }
+                              ]
+                            },
+                            {
+                              name: "Rajiv",
+                            }
+
+                          ]
+
+                      },
+                      {
+                        name: 'Ravinder',
+                      },
+                      {
+                        name: 'Devinder',
+                      },
+                      {
+                        name: 'Shamsher Raj',
+                        attributes:
+                        {
+                          Wife: "Geeta Bali",
+                          wife: " Neela Devi"
+                        },
+                        children: [
+                          {
+                            name: "Adithya Raj"
+                          },
+                          {
+                            name: "Kanchan",
+                            attributes: {
+                              wife: "Kethan Desai",
+                            }
+                          },
+
+                        ]
+                      },
+                      {
+                        name: 'Urmi',
+                      },
+                      {
+                        name: 'Shashi',
+                        attributes: {
+                          wife: "Jennifer Kendal",
+                        },
+                        children: [
+                          {
+                            name: "Kunal",
+                            attributes: {
+                              wife: "Sheena Sippy"
+                            }
+                          },
+                          {
+                            name: "Karan",
+                          },
+                          {
+                            name: "Sanjana",
+                            attributes: {
+                              husband: "Aditya bhattacharya",
+                              husband: "Valmik Thapar"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+
+                }],
+
+
           },
-          {
-            name: 'Level 2: B',
-          },
-        ],
-      },
-      {
-        name: 'Level 2: B',
-      },
-    ],
-  },
-];
+        ]
+    }]
+
+// fake data for force graph
+
+const data = {
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Randhir - Babita",
+      "val": 100
+    },
+    
+    {
+      "id": "3",
+      "name": "Kareena - Saif Ali Khan",
+      "val": 40
+    },
+    {
+      "id": "4",
+      "name": "Karishma",
+      "val": 30
+    },
+    // {
+    //   "id": "5",
+    //   "name": "Taimur",
+    //   "val": 20
+    // },
+  ],
+  "links": [
+    
+    {
+      "source": "1",
+      "target": "3",
+      "relation": "mother",
+    },
+    {
+      "source": "1",
+      "target": "4"
+    },
+    {
+      "source": "3",
+      "target": "4"
+    },
+    // {
+    //   "source": "3",
+    //   "target": "5",
+    //   "relation": "children"
+    // },
+  ]
+}
+
 class App extends Component {
-  state={
+  state = {
     visible: false,
+    currentNode: '',
     familyData: {
       name: "dsgsdgs",
     },
   }
 
-  showModal = () => {
-    console.log("Visible called")
+  sendData = async (values) => {
+    console.log('Received values of form: ', values);
+    console.log("handle submit");
+    let options = {
+      method: 'PUT',
+      uri: 'http://localhost:3001/details/addperson/:user',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'Origin': 'http://localhost:3000',
+        'Access-Control-Request-Method': 'PUT',
+      },
+      body: {
+
+        Name: values.name,
+        Gender: values.gender,
+        relationship: values.relationship,
+        wrt: values.wrt
+      },
+      json: true
+    }
+    console.log(options.body)
+    var value;
+    await request(options).then(data => {
+      value = data
+      console.log(options)
+      //this.setState({isLoggedIn:value})
+    }).catch(e => console.error(e))
+    return value
+
+  }
+
+  showModal = (node) => {
+    console.log("Visible called"+node.name)
     this.setState({
       visible: true,
+      currentNode: node.name,
     })
   }
   handleOk = (e, form) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.sendData(values);
+        //this.sendData(values);
+        //console.log('Received values of form: ', values);
+
       }
     });
     this.setState({
       visible: false,
     });
   }
+
   handleCancel = (e) => {
     console.log(e);
     this.setState({
@@ -76,29 +322,50 @@ class App extends Component {
   render() {
     return (
       <div >
-        {/* <div className="App">
-          <Text />
-          <Main />
-        </div> */}
-        <div style={{width: '100%', height: '1000px'}}>
-          <Tree 
-            data={myTreeData} 
+        <h1>Family Tree</h1>
+        <Main />
+        <div style={{ width: '100%', height: '1000px' }}>
+          {/* <Tree
+            data={myTreeData}
             onClick={this.showModal}
-            collapsible={false} 
+            collapsible={false}
             orientation="vertical"
-            style={{textAlign: 'center'}}
+            style={{ textAlign: 'center' }}
             translate={{
               x: 750,
-              y:300
+              y: 300
+            }}
+          /> */}
+          <ForceGraph2D
+            linkMaterial="relation"
+            linkOpacity={1}
+            linkColor="red"
+            onLinkHover={(link) => { console.log(link ? link.relation : '') }}
+            onNodeClick={(node)=>{this.showModal(node)}}
+            graphData={data}
+            nodeAutoColorBy="group"
+            nodeCanvasObject={(node, ctx, globalScale) => {
+              const label = node.name;
+              const fontSize = 12 / globalScale;
+              ctx.font = `${fontSize}px Sans-Serif`;
+              const textWidth = ctx.measureText(label).width;
+              const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.2); // some padding
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+              ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillStyle = node.color;
+              ctx.fillText(label, node.x, node.y);
             }}
           />
-          <Node 
-            buttonText="Add your details" 
-            visible={this.state.visible} 
-            handleOk={this.handleOk} 
-            handleCancel={this.handleCancel} 
+          <Node
+            buttonText={this.state.currentNode}
+            visible={this.state.visible}
+            handleOk={this.handleOk}
+            handleCancel={this.handleCancel}
           />
         </div>
+            <input type="hidden" value="Kareena"/>
 
         {/* {this.state.familyData ? 
           <div>

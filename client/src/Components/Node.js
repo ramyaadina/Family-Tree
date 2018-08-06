@@ -1,12 +1,12 @@
 import React from 'react';
-import { Form, Select, Input, Button, Radio, Modal } from 'antd';
-import styled from 'styled-components';
+import { Form, Select, Input, Radio, Modal } from 'antd';
+// import styled from 'styled-components';
 
-const CustomButton = styled(Button)`
-  &&.ant-btn-primary {
-    background-color: red;
-  }
-`;
+// const CustomButton = styled(Button)`
+//   &&.ant-btn-primary {
+//     background-color: red;
+//   }
+// `;
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -34,7 +34,7 @@ class Node extends React.Component {
   handleSelectChange = (value) => {
     console.log(value);
     this.props.form.setFieldsValue({
-      note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
+      name: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
     });
   }
 
@@ -77,10 +77,11 @@ class Node extends React.Component {
               labelCol={{ span: 5 }}
               wrapperCol={{ span: 8 }}
             >
-              {getFieldDecorator('relation', {
-                rules: [{ required: true, message: 'Please input your note!' }],
+              {getFieldDecorator('relationship', {
+                rules: [{ required: true, message: 'Please input your name!' }],
+                initialValue:"--Select--"
               })(
-                <Select defaultValue="parent" style={{ width: 120 }} >
+                <Select style={{ width: 120 }} >
                   <Option value="parent">parent</Option>
                   <Option value="sibling">sibling</Option>
                   <Option value="children">children</Option>
@@ -93,8 +94,8 @@ class Node extends React.Component {
               labelCol={{ span: 5 }}
               wrapperCol={{ span: 8 }}
             >
-              {getFieldDecorator('note', {
-                rules: [{ required: true, message: 'Please input your note!' }],
+              {getFieldDecorator('name', {
+                rules: [{ required: true, message: 'Please input your name!' }],
               })(
                 <Input />
               )}
