@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Node from './Components/Node.js';
-import Tree from 'react-d3-tree';
 import ChildForm from './Components/ChildForm';
 import Main from './Components/Main';
 import request from 'request-promise'
