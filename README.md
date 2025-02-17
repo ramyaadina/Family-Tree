@@ -1,5 +1,5 @@
 # Family-Tree
-Capstone Project
+Capstone Project during Technology exponent program in SOAL
 
 ## Overview
 The **Family Tree** is an application designed to visualize and manage family relationships. Users can add, edit, and explore family members' details while navigating through a visually structured family tree.
